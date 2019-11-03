@@ -96,3 +96,5 @@
 - we managed to delete the nested scanner so that all test could go without any more obstacle..
 - print receipt were reconstructed and being a new isolated method.
 - isInTransaction is represented as a status of the program process. 
+### Version 3.0.0
+- **Solid UI Completed!!!!!!!**
