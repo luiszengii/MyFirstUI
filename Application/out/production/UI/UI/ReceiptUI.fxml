@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.ReceiptController">
+   <children>
+      <Label layoutX="104.0" layoutY="114.0" prefHeight="33.0" prefWidth="122.0" text="Transaction Time:" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="104.0" layoutY="147.0" prefHeight="33.0" prefWidth="122.0" text="Item sold:" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="104.0" layoutY="262.0" prefHeight="33.0" prefWidth="122.0" text="Total Money: $" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="104.0" layoutY="295.0" prefHeight="33.0" prefWidth="122.0" text="Money Paid: $" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="104.0" layoutY="328.0" prefHeight="33.0" prefWidth="122.0" text="Change Given: $" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <TableView fx:id="itemTable" layoutX="300.0" layoutY="147.0" prefHeight="221.0" prefWidth="270.0">
+        <columns>
+          <TableColumn fx:id="product_name" editable="false" prefWidth="100.0" text="Product Name" />
+          <TableColumn fx:id="amount" editable="false" prefWidth="58.0" text="Amount" />
+            <TableColumn fx:id="total_money_column" editable="false" prefWidth="111.0" text="Total money" />
+        </columns>
+      </TableView>
+      <Label layoutX="169.0" layoutY="48.0" text="Transaction ID:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="time" editable="false" layoutX="238.0" layoutY="119.0" prefHeight="23.0" prefWidth="333.0" />
+      <TextField fx:id="total_money" editable="false" layoutX="203.0" layoutY="267.0" prefHeight="23.0" prefWidth="70.0" />
+      <TextField fx:id="money_paid" editable="false" layoutX="201.0" layoutY="300.0" prefHeight="23.0" prefWidth="70.0" />
+      <TextField fx:id="change" editable="false" layoutX="213.0" layoutY="333.0" prefHeight="23.0" prefWidth="70.0" />
+      <TextField fx:id="TxID" layoutX="300.0" layoutY="48.0" prefHeight="23.0" prefWidth="58.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,10 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+VendingMachine.project,default,VendingMachine,1151,891,60,49,165,119,45,31,8,11
+VendingMachine.project,default,ShoppingCart,6,382,2,18,2,50,2,17,0,9
+VendingMachine.project,default,Transaction,0,39,0,0,0,14,0,7,0,7
+VendingMachine.project,default,VendingMachine.new ArrayList() {...},0,25,0,2,0,4,0,2,0,1
+VendingMachine.project,default,Product,24,294,4,4,8,40,3,12,1,10
+VendingMachine.project,default,VendingMachine.new ArrayList() {...},0,24,0,2,0,4,0,2,0,1
+VendingMachine.project,default,ShoppingCart.new HashMap() {...},0,6,0,0,0,1,0,1,0,1
+VendingMachine.project,default,countDown,43,0,8,0,8,0,6,0,2,0
+VendingMachine.project,default,Application,169,0,29,0,40,0,18,0,3,0

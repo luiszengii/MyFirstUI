@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'jacoco'
+}
+
+mainClassName = "Application"
+
+version '2.1.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.1.0',
+            'org.junit.vintage:junit-vintage-engine:5.1.0',
+            'org.junit.platform:junit-platform-launcher:1.1.0',
+            'org.junit.platform:junit-platform-runner:1.1.0'
+}
+
+test {
+    useJUnitPlatform()
+    test.finalizedBy jacocoTestReport
+}
+
+run {
+    standardInput = System.in
+    standardOutput = System.out
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled = true
+        csv.enabled = true
+    }
+}

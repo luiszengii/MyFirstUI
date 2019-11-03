@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VendingMachine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">VendingMachine.project</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">VendingMachine.java</span></div><h1>VendingMachine.java</h1><pre class="source lang-java linenums">import java.util.*;
+import java.lang.Math;
+import java.time.*;
+
+public class VendingMachine {
+    static final String MAINMENU = &quot;            MAIN     MENU           \n&quot;+
+            &quot;--------------------------------------------------\n&quot;+
+            &quot;|          Drinks         |       Chocolates      |\n&quot;+
+            &quot;--------------------------------------------------\n&quot;+
+            &quot;|       water(1)-2.00$    |      MandM(4)-8.00$   |\n&quot;+
+            &quot;|     soft_drink(2)-3.00$ |      Mars(5)-5.00$    |\n&quot;+
+            &quot;|      juice(3)-2.50$     |    Sneakers(6)-2.50$  |\n&quot;+
+            &quot;|                         |     Bounty(7)-1,00$   |\n&quot;+
+            &quot;--------------------------------------------------\n&quot;+
+            &quot;|          Chips          |        Lollies        |\n&quot;+
+            &quot;--------------------------------------------------\n&quot;+
+            &quot;|    original(8)-2.50$    |  sour_worms(12)-5.00$ |\n&quot;+
+            &quot;|     chicken(9)-3.00$    | jellybeans(13)-2.00$  |\n&quot;+
+            &quot;|       BBQ(10)-2.70$     | little_bears(14)-6.50$|\n&quot;+
+            &quot;| sweet_chillies(11)-3.00$|   part_mix(15)-4.50$  |\n&quot;+
+            &quot;--------------------------------------------------\n&quot;;
+
+    static final String User_Instruction =
+            &quot;\nPlease type in \'add\' followed by the product name or id and the number of goods u want to buy below(by default 1)\n&quot; +
+            &quot;Or type in \'delete\' followed by the product name or id and the number of goods u want to delete in shopping cart(by default 1)\n&quot; +
+            &quot;Or type in \'cart\' to see the status of products in your shopping cart\n&quot; +
+            &quot;Or type in \'machine\' to see the status of products in this Vending Machine\n&quot; +
+            &quot;Or type in \'check\' if u wish to proceed to check out\n&quot; +
+            &quot;Or type in \'cancel\' if u want to cancel the transaction\n&quot;;
+
+    static final String Staff_Instruction =
+            &quot;\n\'fill\' to fill the VM\n\'print\' to print the transactions\n&quot;;
+
+<span class="fc" id="L34">    static ArrayList&lt;String&gt; list_of_Product_name = new ArrayList&lt;String&gt;(){{</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        for (Product p : Product.values()) {</span>
+<span class="fc" id="L36">            add(p.getName());</span>
+        }
+<span class="fc" id="L38">    }};</span>
+
+<span class="fc" id="L40">    static ArrayList&lt;Integer&gt; List_of_Product_id = new ArrayList&lt;Integer&gt;(){{</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        for (Product p : Product.values()) {</span>
+<span class="fc" id="L42">            add(p.getProduct_id());</span>
+        }
+<span class="fc" id="L44">    }};</span>
+
+<span class="fc" id="L46">    static int count = 100;</span>
+<span class="fc" id="L47">    static ArrayList&lt;Transaction&gt; transactions = new ArrayList&lt;Transaction&gt;();</span>
+    String mode;
+    ShoppingCart shoppingCart;
+    HashMap&lt;String, Product&gt; Products;
+
+<span class="fc" id="L52">    VendingMachine(){</span>
+<span class="fc" id="L53">        this.mode = &quot;user&quot;;</span>
+<span class="fc" id="L54">        this.shoppingCart = new ShoppingCart();</span>
+<span class="fc" id="L55">        this.Products = new HashMap&lt;String, Product&gt;();</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        for (Product p : Product.values()){ this.Products.put(p.getName(), p); }</span>
+<span class="fc" id="L57">    }</span>
+
+    void clear(){
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        for (Product p : this.Products.values()) {</span>
+<span class="fc" id="L61">            p.setNum_of_items(0);</span>
+<span class="fc" id="L62">        }</span>
+<span class="fc" id="L63">    }</span>
+
+    HashMap&lt;Product, Integer&gt; getProduct_status(){
+<span class="nc" id="L66">        HashMap&lt;Product, Integer&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        for (Product p : this.Products.values()){ map.put(p, p.getNum_of_items()); }</span>
+<span class="nc" id="L68">        return map;</span>
+    }
+
+    String Product_statusUI(){
+<span class="fc" id="L72">        return</span>
+                &quot;------------------------------------\n&quot; +
+                &quot;|     Drinks      |   Chocolates   |\n&quot; +
+                &quot;------------------------------------\n&quot; +
+<span class="fc" id="L76"> String.format(&quot;|     water %d     |     MandM %d    |\n&quot;, this.Products.get(&quot;water&quot;).getNum_of_items(), this.Products.get(&quot;MandM&quot;).getNum_of_items()) +</span>
+<span class="fc" id="L77"> String.format(&quot;|   soft_drink %d  |      Mars %d    |\n&quot;, this.Products.get(&quot;soft_drink&quot;).getNum_of_items(), this.Products.get(&quot;Mars&quot;).getNum_of_items()) +</span>
+<span class="fc" id="L78"> String.format(&quot;|     juice %d     |    Sneakers %d  |\n&quot;, this.Products.get(&quot;juice&quot;).getNum_of_items(), this.Products.get(&quot;Sneakers&quot;).getNum_of_items()) +</span>
+<span class="fc" id="L79"> String.format(&quot;|                 |     Bounty %d   |\n&quot;, this.Products.get(&quot;Bounty&quot;).getNum_of_items()) +</span>
+                &quot;------------------------------------\n&quot; +
+               &quot;|     Chips       |     Lollies    |\n&quot; +
+                &quot;------------------------------------\n&quot; +
+<span class="fc" id="L83"> String.format(&quot;|    original %d   |  sour_worms %d  |\n&quot;, this.Products.get(&quot;original&quot;).getNum_of_items(), this.Products.get(&quot;sour_worms&quot;).getNum_of_items()) +</span>
+<span class="fc" id="L84"> String.format(&quot;|     chicken %d   |  jellybeans %d  |\n&quot;, this.Products.get(&quot;chicken&quot;).getNum_of_items(), this.Products.get(&quot;jellybeans&quot;).getNum_of_items()) +</span>
+<span class="fc" id="L85"> String.format(&quot;|       BBQ %d     | little_bears %d |\n&quot;, this.Products.get(&quot;BBQ&quot;).getNum_of_items(), this.Products.get(&quot;little_bears&quot;).getNum_of_items()) +</span>
+<span class="fc" id="L86"> String.format(&quot;|sweet_chillies %d |   part_mix %d   |\n&quot;, this.Products.get(&quot;sweet_chillies&quot;).getNum_of_items(), this.Products.get(&quot;part_mix&quot;).getNum_of_items()) +</span>
+                &quot;------------------------------------\n&quot;;
+    }
+
+    //remind user the denominations they can pay
+    static String money_reminder(){
+<span class="fc" id="L92">        System.out.println(&quot;You can only pay by these denominations of coins or notes: 10c, 20c, 50c, $1, $2, $5, $10, $20&quot;);</span>
+<span class="fc" id="L93">        return &quot;You can only pay by these denominations of coins or notes: 10c, 20c, 50c, $1, $2, $5, $10, $20\n&quot;;</span>
+    }
+
+    //convert string of input_money to double which can be used in real
+    static double convert_input_money(String input_money){
+<span class="fc" id="L98">        String[] temp_list = input_money.split(&quot;&quot;);</span>
+<span class="fc" id="L99">        List&lt;String&gt; accept_money = new ArrayList&lt;&gt;(Arrays.asList(&quot;10c&quot;,&quot;20c&quot;,&quot;50c&quot;,&quot;$1&quot;,&quot;$2&quot;,&quot;$5&quot;,&quot;$10&quot;,&quot;$20&quot;));</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        if (input_money.equals(&quot;10c&quot;)){</span>
+<span class="fc" id="L101">            return 0.1;</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        }else if (input_money.equals(&quot;20c&quot;)){</span>
+<span class="fc" id="L103">            return 0.2;</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        }else if (input_money.equals(&quot;50c&quot;)){</span>
+<span class="fc" id="L105">            return 0.5;</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        }else if (temp_list[0].equals(&quot;$&quot;)){</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">            if (accept_money.contains(input_money)){</span>
+<span class="fc" id="L108">                String double_string = input_money.substring(1);</span>
+<span class="fc" id="L109">                double result = Double.parseDouble(double_string);</span>
+<span class="fc" id="L110">                return result;</span>
+            } else {
+<span class="fc" id="L112">                return -1.0;</span>
+            }
+        }else{
+<span class="fc" id="L115">            return -1.0;</span>
+        }
+    }
+
+    //return a ArrayList containing changes which need to be returned宸茬煡瑕佺粰澶氬皯閽辩湅鎬庝箞缁檚ta
+    static ArrayList&lt;String&gt; Calculate_change(double change){
+<span class="fc" id="L121">        ArrayList&lt;String&gt; result = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L122">        ArrayList&lt;Double&gt; accept_money = new ArrayList&lt;Double&gt;(Arrays.asList(20.00, 10.00, 5.00, 2.00, 1.00, 0.50, 0.20, 0.10));</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">        while (change != 0.00){</span>
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">            for (double current_tested : accept_money) {</span>
+<span class="fc bfc" id="L125" title="All 4 branches covered.">                if (change &gt; current_tested || change == current_tested) {</span>
+<span class="fc" id="L126">                    int number_of_change = (int) Math.floor(change / current_tested);</span>
+<span class="fc" id="L127">                    String result_line = Integer.toString(number_of_change) + &quot; $&quot; + String.format(&quot;%.2f&quot;, current_tested);</span>
+<span class="fc" id="L128">                    result.add(result_line);</span>
+<span class="fc" id="L129">                    change = (change % current_tested) * 100;</span>
+<span class="fc" id="L130">                    change = (double) Math.round(change) / 100;</span>
+<span class="fc" id="L131">                    break;</span>
+                }
+<span class="fc" id="L133">            }</span>
+        }
+<span class="fc" id="L135">        return result;</span>
+    }
+
+    String user_add(List&lt;String&gt; ls){
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        if (this.Products.containsKey(ls.get(1))) {</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">            if (ls.size() == 2) {</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">                if (this.Products.get(ls.get(1)).getNum_of_items() &lt; 1) {</span>
+<span class="fc" id="L142">                    System.out.println(&quot;Sorry, we are out of &quot; + ls.get(1));</span>
+<span class="fc" id="L143">                    return &quot;Sorry, we are out of &quot; + ls.get(1);</span>
+                } else {
+<span class="fc" id="L145">                    this.Products.get(ls.get(1)).sell(1);//remove them/it from vending machine</span>
+<span class="fc" id="L146">                    this.shoppingCart.add_Product(Products.get(ls.get(1)), 1); //putting product in cart, the default number is 1</span>
+<span class="fc" id="L147">                    return &quot;SC: 1 of &quot; + ls.get(1) + &quot; has been added to your shopping cart.&quot;;</span>
+                }
+            }
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">            else if (ls.size() == 3){</span>
+                try{
+<span class="fc" id="L152">                    int numOfP = Integer.parseInt(ls.get(2));</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">                    if(numOfP &gt; this.Products.get(ls.get(1)).getNum_of_items()){</span>
+<span class="fc" id="L154">                        System.out.println(&quot;The number you input is out of stock&quot;);</span>
+<span class="fc" id="L155">                        return &quot;The number you input is out of stock&quot;;</span>
+                    } else {
+<span class="fc" id="L157">                        this.shoppingCart.add_Product(this.Products.get(ls.get(1)), numOfP);</span>
+<span class="fc" id="L158">                        this.Products.get(ls.get(1)).sell(numOfP);//remove them/it from vending machine</span>
+<span class="fc" id="L159">                        return &quot;SC: &quot; + ls.get(2) + &quot; of &quot; + ls.get(1) + &quot; has been added to your shopping cart.&quot;;</span>
+                    }
+<span class="nc" id="L161">                } catch(NumberFormatException e) {</span>
+<span class="nc" id="L162">                    System.out.println(&quot;The number of products to be selected must be Integer&quot;);</span>
+<span class="nc" id="L163">                    return &quot;The number of products to be selected must be Integer&quot;;</span>
+                }
+            }//if user input amount of products to be selected, the program will accept this requirements
+            else{
+<span class="nc" id="L167">                System.out.println(&quot;Please type in right format&quot;);</span>
+<span class="nc" id="L168">                return &quot;Please type in right format&quot;;</span>
+            }
+
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">        } else if (!this.Products.containsKey(ls.get(1))) {//鐢ㄦ埛杈撳叆鏁板瓧鎯呭喌</span>
+            try{
+<span class="fc" id="L173">                int product_id = Integer.parseInt(ls.get(1));</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">                if (List_of_Product_id.contains(product_id)){</span>
+<span class="fc" id="L175">                    String product_name = &quot;&quot;;</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">                    for (String n : Products.keySet()){</span>
+<span class="fc" id="L177">                        Product p = Products.get(n);</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">                        if (p.getProduct_id() == product_id){</span>
+<span class="fc" id="L179">                            product_name = n;</span>
+                        }
+<span class="fc" id="L181">                    }</span>
+<span class="pc bpc" id="L182" title="1 of 2 branches missed.">                    if (ls.size() == 2){</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">                        if (this.Products.get(product_name).getNum_of_items() &lt; 1){</span>
+<span class="nc" id="L184">                            System.out.println(&quot;Sorry, we are out of &quot; + product_name);</span>
+<span class="nc" id="L185">                            return &quot;Sorry, we are out of &quot; + product_name;</span>
+                        }else{
+<span class="nc" id="L187">                            this.Products.get(product_name).sell(1);//remove them/it from vending machine</span>
+<span class="nc" id="L188">                            this.shoppingCart.add_Product(Products.get(product_name), 1); //putting product in cart, the default number is 1</span>
+<span class="nc" id="L189">                            return &quot;SC: 1 of &quot; + product_name + &quot; has been added to your shopping cart.&quot;;</span>
+                        }
+                    }
+<span class="pc bpc" id="L192" title="1 of 2 branches missed.">                    else if (ls.size() == 3){</span>
+                        try{
+<span class="fc" id="L194">                            int number_product =  Integer.parseInt(ls.get(2));</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">                            if (number_product &gt; this.Products.get(product_name).getNum_of_items()){</span>
+<span class="fc" id="L196">                                System.out.println(&quot;The number you input is out of stock&quot;);</span>
+<span class="fc" id="L197">                                return &quot;The number you input is out of stock&quot;;</span>
+                            }else{
+<span class="fc" id="L199">                                this.shoppingCart.add_Product(this.Products.get(product_name), number_product);</span>
+<span class="fc" id="L200">                                this.Products.get(product_name).sell(number_product);//remove them/it from vending machine</span>
+<span class="fc" id="L201">                                return &quot;SC: &quot; + ls.get(2) + &quot; of &quot; + product_name + &quot; has been added to your shopping cart.&quot;;</span>
+                            }
+<span class="nc" id="L203">                        }catch (NumberFormatException e){</span>
+<span class="nc" id="L204">                            System.out.println(&quot;The number of products to be selected must be Integer&quot;);</span>
+<span class="nc" id="L205">                            return &quot;The number of products to be selected must be Integer&quot;;</span>
+                        }
+                    }
+                    else{
+<span class="nc" id="L209">                        System.out.println(&quot;Please type in right format&quot;);</span>
+<span class="nc" id="L210">                        return &quot;Please type in right format&quot;;</span>
+                    }
+                }else{
+<span class="fc" id="L213">                    System.out.println(&quot;Product not exist, please type in the correct product name&quot;);</span>
+<span class="fc" id="L214">                    return &quot;Product not exist, please type in the correct product name&quot;;</span>
+                }
+<span class="fc" id="L216">            }catch (NumberFormatException e){</span>
+<span class="fc" id="L217">                System.out.println(&quot;Product not exist, please type in the correct product name&quot;);</span>
+<span class="fc" id="L218">                return &quot;Product not exist, please type in the correct product name&quot;;</span>
+            }
+        }
+<span class="nc" id="L221">        return null;</span>
+    }
+
+    String user_delete(List&lt;String&gt; ls){
+<span class="nc bnc" id="L225" title="All 2 branches missed.">        if (list_of_Product_name.contains(ls.get(1))) {</span>
+<span class="nc" id="L226">            Product p = this.Products.get(ls.get(1));</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">            if (ls.size() == 2) {</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">                if (this.shoppingCart.getList_of_Products().get(p) &lt; 1) {</span>
+<span class="nc" id="L229">                    System.out.println(&quot;your shopping cart do not have &quot; + ls.get(1));</span>
+<span class="nc" id="L230">                    return &quot;your shopping cart do not have &quot; + ls.get(1);</span>
+                } else {
+<span class="nc" id="L232">                    this.Products.get(ls.get(1)).add_back(1);//remove them/it from cart</span>
+<span class="nc" id="L233">                    this.shoppingCart.delete_Product(Products.get(ls.get(1)), 1); //putting product back in machine, the default number is 1</span>
+<span class="nc" id="L234">                    return null;</span>
+                }
+            }
+
+<span class="nc bnc" id="L238" title="All 2 branches missed.">            if (ls.size() == 3){</span>
+                try{
+<span class="nc" id="L240">                    int numOfP = Integer.parseInt(ls.get(2));</span>
+<span class="nc bnc" id="L241" title="All 2 branches missed.">                    if(numOfP &gt; this.shoppingCart.getList_of_Products().get(p)){</span>
+<span class="nc" id="L242">                        System.out.println(&quot;The number you input is more than u have in your shopping cart&quot;);</span>
+<span class="nc" id="L243">                        return &quot;The number you input is more than u have in your shopping cart&quot;;</span>
+                    } else {
+<span class="nc" id="L245">                        this.Products.get(ls.get(1)).add_back(numOfP);</span>
+<span class="nc" id="L246">                        this.shoppingCart.delete_Product(Products.get(ls.get(1)), numOfP);</span>
+<span class="nc" id="L247">                        return null;</span>
+                    }
+<span class="nc" id="L249">                } catch(NumberFormatException e) {</span>
+<span class="nc" id="L250">                    System.out.println(&quot;The number of products to be selected must be Integer&quot;);</span>
+<span class="nc" id="L251">                    return &quot;The number of products to be selected must be Integer&quot;;</span>
+                }
+            }//if user input amount of products to be selected, the program will accept this requirements
+
+<span class="nc bnc" id="L255" title="All 2 branches missed.">        } else if (!list_of_Product_name.contains(ls.get(1))) {</span>
+<span class="nc" id="L256">            System.out.println(&quot;Product not exist, please type in the correct product name&quot;);</span>
+<span class="nc" id="L257">            return &quot;Product not exist, please type in the correct product name&quot;;</span>
+        }
+<span class="nc" id="L259">        return null;</span>
+    }
+
+    String user_receipt(){
+<span class="nc" id="L263">        String l_r = &quot;&quot;;</span>
+<span class="nc" id="L264">        Transaction t = transactions.get((transactions.size())-1);</span>
+<span class="nc" id="L265">        System.out.println(&quot;transaction complete, thank u!&quot;);</span>
+<span class="nc" id="L266">        l_r = l_r + &quot;transaction complete, thank u!\n&quot;;</span>
+<span class="nc" id="L267">        System.out.println();</span>
+<span class="nc" id="L268">        l_r = l_r + &quot;\n&quot;;</span>
+<span class="nc" id="L269">        System.out.println(&quot;--------------------------------&quot;);</span>
+<span class="nc" id="L270">        l_r = l_r + &quot;--------------------------------\n&quot;;</span>
+<span class="nc" id="L271">        System.out.println(&quot;Here is your receipt:&quot;);</span>
+<span class="nc" id="L272">        l_r = l_r + &quot;Here is your receipt:\n&quot;;</span>
+<span class="nc bnc" id="L273" title="All 2 branches missed.">        for(Map.Entry&lt;Product, Integer&gt; e : t.getItem_sold().entrySet()){</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">            if (e.getValue() &gt; 0) {</span>
+<span class="nc" id="L275">                System.out.println(e.getKey() + &quot; * &quot; + e.getValue());</span>
+<span class="nc" id="L276">                l_r += e.getKey() + &quot; * &quot; + e.getValue() + &quot;\n&quot;;</span>
+            }
+<span class="nc" id="L278">        }</span>
+<span class="nc" id="L279">        System.out.println();</span>
+<span class="nc" id="L280">        l_r = l_r + &quot;\n&quot;;</span>
+<span class="nc" id="L281">        System.out.println(&quot;Transaction id:&quot; + t.getId());</span>
+<span class="nc" id="L282">        l_r = l_r + &quot;Transaction id:&quot; + t.getId()+&quot;\n&quot;;</span>
+<span class="nc" id="L283">        System.out.printf(&quot;Total cost: $%.2f\n&quot;, t.getMoney_paid());</span>
+<span class="nc" id="L284">        l_r = l_r + String.format(&quot;Total cost: $%.2f&quot;, t.getMoney_paid())+&quot;\n&quot;;</span>
+<span class="nc" id="L285">        System.out.printf(&quot;Total payment: $%.2f\n&quot; , t.getTotal_price());</span>
+<span class="nc" id="L286">        l_r = l_r + String.format(&quot;Total payment: $%.2f&quot; , t.getTotal_price())+&quot;\n&quot;;</span>
+<span class="nc" id="L287">        System.out.printf(&quot;Total change: $%.2f\n&quot;, t.getChange());</span>
+<span class="nc" id="L288">        l_r += String.format(&quot;Total change: $%.2f\n&quot;, t.getChange());</span>
+<span class="nc" id="L289">        System.out.println(&quot;--------------------------------&quot;);</span>
+<span class="nc" id="L290">        l_r = l_r + &quot;--------------------------------\n&quot;;</span>
+<span class="nc" id="L291">        return l_r;</span>
+    }
+
+
+    String user_check(List&lt;String&gt; ls){
+<span class="fc" id="L296">        String l_r = &quot;&quot;;</span>
+<span class="fc bfc" id="L297" title="All 2 branches covered.">        if(ls.size()!=1){</span>
+<span class="fc" id="L298">            System.out.println(&quot;'CHECK' command is a wrong format&quot;);</span>
+<span class="fc" id="L299">            return &quot;'CHECK' command is a wrong format&quot;;</span>
+        }
+        else {
+            //Display the shopping cart before checking
+<span class="fc" id="L303">            System.out.println(this.shoppingCart.showUI());</span>
+<span class="fc" id="L304">            l_r = l_r+ this.shoppingCart.showUI()+&quot;\n&quot; ;</span>
+
+            //Tell customer the amount they need to pay
+<span class="fc" id="L307">            double total_price = this.shoppingCart.Calculate_total_price();</span>
+<span class="fc" id="L308">            System.out.printf(&quot;The total price you need to pay is: $%.2f\n&quot;, total_price);</span>
+<span class="fc" id="L309">            l_r += String.format(&quot;The total price you need to pay is: $%.2f\n&quot;, total_price);</span>
+
+            //paying progress
+<span class="fc" id="L312">            System.out.println(&quot;Now you will enter paying progress&quot;);</span>
+<span class="fc" id="L313">            l_r += &quot;Now you will enter paying progress\n&quot;;</span>
+<span class="fc" id="L314">            l_r += money_reminder();</span>
+
+            //taking valid input money
+<span class="fc" id="L317">            String input_money = ls.get(0);</span>
+<span class="pc bpc" id="L318" title="1 of 2 branches missed.">            if (input_money.equals(&quot;cancel&quot;)){</span>
+<span class="nc" id="L319">                System.out.printf(&quot;$%.2f will be given back to you\n&quot;, Application.input_amount);</span>
+<span class="nc" id="L320">                l_r = l_r + String.format(&quot;$%.2f will be given back to you\n&quot;, Application.input_amount);</span>
+<span class="nc" id="L321">                this.user_cancel();</span>
+            }
+
+<span class="pc bpc" id="L324" title="1 of 2 branches missed.">            if (input_money.equals(&quot;check&quot;)) {</span>
+<span class="fc" id="L325">                return l_r;</span>
+            }
+
+<span class="nc" id="L328">            double double_money = convert_input_money(input_money);</span>
+<span class="nc bnc" id="L329" title="All 2 branches missed.">            if (double_money == -1.0){</span>
+<span class="nc" id="L330">                System.out.println(&quot;Please input given denominations money&quot;);//exception of inputting wrong format</span>
+<span class="nc" id="L331">                l_r = l_r + &quot;Please input given denominations money\n&quot;;</span>
+            }else{
+<span class="nc" id="L333">                Application.input_amount += double_money;</span>
+<span class="nc bnc" id="L334" title="All 2 branches missed.">                if (Application.input_amount &lt; total_price){</span>
+<span class="nc" id="L335">                    double need_more_money = (double)Math.round((total_price - Application.input_amount)*100)/100;//making it not with infinity digit</span>
+<span class="nc" id="L336">                    System.out.printf(&quot;You still need to pay $%.2f\n&quot;, need_more_money);//when paying not enough money</span>
+<span class="nc" id="L337">                    l_r = l_r + String.format(&quot;You still need to pay $%.2f\n&quot;, need_more_money);</span>
+<span class="nc" id="L338">                } else {</span>
+<span class="nc" id="L339">                    double change = (double) Math.round((Application.input_amount - total_price)*100) / 100;</span>
+<span class="nc" id="L340">                    ArrayList&lt;String&gt; result = Calculate_change(change);</span>
+<span class="nc bnc" id="L341" title="All 2 branches missed.">                    if (!result.isEmpty()) {</span>
+<span class="nc" id="L342">                        String final_result = &quot;The change would be: &quot; + result.get(0);</span>
+<span class="nc bnc" id="L343" title="All 2 branches missed.">                        for (int i = 1; i &lt; result.size(); i++){</span>
+<span class="nc" id="L344">                            final_result = final_result + &quot;, &quot; + result.get(i);</span>
+                        }
+<span class="nc" id="L346">                        System.out.println(final_result);//paying enough money and then begin to calculate and return change</span>
+<span class="nc" id="L347">                        l_r = l_r + final_result+&quot;\n&quot;;</span>
+                    }
+
+                    //adding the transaction details in the list of tx
+<span class="nc" id="L351">                    HashMap&lt;Product,Integer&gt; temp = new HashMap&lt;Product,Integer&gt;();</span>
+<span class="nc bnc" id="L352" title="All 2 branches missed.">                    for (Product p: this.shoppingCart.getList_of_Products().keySet()){</span>
+<span class="nc" id="L353">                        temp.put(p, this.shoppingCart.getList_of_Products().get(p));</span>
+<span class="nc" id="L354">                    }</span>
+<span class="nc" id="L355">                    Transaction current_transaction = new Transaction(count, LocalDateTime.now(),</span>
+                            temp, Application.input_amount, change, total_price);
+<span class="nc" id="L357">                    transactions.add(current_transaction);</span>
+<span class="nc" id="L358">                    this.shoppingCart.clear();</span>
+<span class="nc" id="L359">                    count += 1;</span>
+
+                    //print receipt
+<span class="nc" id="L362">                    l_r += user_receipt();</span>
+
+                    //set the program out of transaction status
+<span class="nc" id="L365">                    Application.isInTransaction = false;</span>
+                }
+            }
+        }
+<span class="nc" id="L369">        return l_r;</span>
+    }
+
+    String user_machine(){
+<span class="nc" id="L373">        System.out.println(this.Product_statusUI());</span>
+<span class="nc" id="L374">        return this.Product_statusUI()+&quot;\n&quot;;</span>
+    }
+
+    String user_cart(){
+<span class="nc" id="L378">        System.out.println(this.shoppingCart.showUI());</span>
+<span class="nc" id="L379">        return this.shoppingCart.showUI()+&quot;\n&quot;;</span>
+    }
+
+    String user_cancel(){
+<span class="nc bnc" id="L383" title="All 2 branches missed.">        for (Map.Entry&lt;Product, Integer&gt; e : this.shoppingCart.getList_of_Products().entrySet()){</span>
+<span class="nc bnc" id="L384" title="All 2 branches missed.">            if(e.getValue() &gt; 0){</span>
+<span class="nc" id="L385">                this.Products.get(e.getKey().getName()).add_back(e.getValue());</span>
+<span class="nc" id="L386">                this.shoppingCart.delete_Product(Products.get(e.getKey().getName()), e.getValue());</span>
+            }
+<span class="nc" id="L388">        }</span>
+<span class="nc" id="L389">        System.out.println(&quot;transaction canceled, products moved back to machine from cart&quot;);</span>
+<span class="nc" id="L390">        return &quot;transaction canceled, products moved back to machine from cart\n&quot;;</span>
+    }
+
+    String staff_fill(){
+<span class="fc bfc" id="L394" title="All 2 branches covered.">        for (Product p : this.Products.values()) {</span>
+<span class="fc" id="L395">            p.fill();</span>
+<span class="fc" id="L396">        }</span>
+<span class="fc" id="L397">        System.out.println(&quot;fill successfully&quot;);</span>
+<span class="fc" id="L398">        return &quot;fill successfully\n&quot;;</span>
+    }
+
+    String staff_print(){
+<span class="nc" id="L402">        String l_rr = &quot;&quot;;</span>
+<span class="nc" id="L403">        System.out.println(&quot;This part is about daily transaction details&quot;);</span>
+<span class="nc" id="L404">        l_rr = l_rr + &quot;This part is about daily transaction details\n&quot;;</span>
+<span class="nc bnc" id="L405" title="All 2 branches missed.">        for (int i=0;i&lt;transactions.size();i++){</span>
+<span class="nc" id="L406">            Transaction current_t = transactions.get(i);</span>
+<span class="nc" id="L407">            System.out.println(&quot;Transaction &quot;+current_t.getId()+&quot;: &quot;);</span>
+<span class="nc" id="L408">            l_rr = l_rr + &quot;Transaction &quot;+current_t.getId()+&quot;: &quot;+&quot;\n&quot;;</span>
+<span class="nc" id="L409">            System.out.println(&quot;(1) Transaction date and time are &quot;+current_t.getDate_time());</span>
+<span class="nc" id="L410">            l_rr = l_rr + &quot;(1) Transaction date and time are &quot;+current_t.getDate_time()+&quot;\n&quot;;</span>
+<span class="nc" id="L411">            System.out.println(&quot;(2) In this transaction, these are sold items and sold number: &quot;);</span>
+<span class="nc" id="L412">            l_rr = l_rr + &quot;(2) In this transaction, these are sold items and sold number: &quot;+&quot;\n&quot;;</span>
+<span class="nc bnc" id="L413" title="All 2 branches missed.">            for(Product p: current_t.getItem_sold().keySet()){</span>
+<span class="nc" id="L414">                System.out.println(&quot;    &quot;+current_t.getItem_sold().get(p)+&quot; &quot;+p.getName()+</span>
+                        &quot; are(is) sold&quot;);
+<span class="nc" id="L416">                l_rr = l_rr + &quot;    &quot;+current_t.getItem_sold().get(p)+&quot; &quot;+p.getName()+</span>
+                        &quot; are(is) sold&quot; + &quot;\n&quot;;
+<span class="nc" id="L418">            }</span>
+<span class="nc" id="L419">            System.out.println(&quot;(3) In this transaction, amount of money paid is &quot;+current_t.getMoney_paid() );</span>
+<span class="nc" id="L420">            l_rr = l_rr + &quot;(3) In this transaction, amount of money paid is &quot;+current_t.getMoney_paid()+&quot;\n&quot;;</span>
+<span class="nc" id="L421">            System.out.println(&quot;(4) In this transaction, the change is &quot;+current_t.getChange() );</span>
+<span class="nc" id="L422">            l_rr = l_rr + &quot;(4) In this transaction, the change is &quot;+current_t.getChange()+&quot;\n&quot;;</span>
+        }
+<span class="nc" id="L424">        System.out.println(&quot;--------------------------------------------------&quot;);</span>
+<span class="nc" id="L425">        l_rr = l_rr + &quot;--------------------------------------------------\n&quot;;</span>
+<span class="nc" id="L426">        System.out.println(&quot;This part is about available stock&quot;);</span>
+<span class="nc" id="L427">        l_rr = l_rr + &quot;This part is about available stock&quot;+&quot;\n&quot;;</span>
+<span class="nc bnc" id="L428" title="All 2 branches missed.">        for (String name: this.Products.keySet()){</span>
+<span class="nc" id="L429">            System.out.println(&quot;The stock of &quot; + name + &quot; is &quot; + this.Products.get(name).getNum_of_items());</span>
+<span class="nc" id="L430">            l_rr = l_rr + &quot;The stock of &quot; + name + &quot; is &quot; + this.Products.get(name).getNum_of_items()+&quot;\n&quot;;</span>
+<span class="nc" id="L431">        }</span>
+<span class="nc" id="L432">        System.out.println(&quot;--------------------------------------------------&quot;);</span>
+<span class="nc" id="L433">        l_rr = l_rr + &quot;--------------------------------------------------\n&quot;;</span>
+<span class="nc" id="L434">        return l_rr;</span>
+    }
+
+    String user_input(String s){
+<span class="fc" id="L438">        List&lt;String&gt; ls = Arrays.asList(s.split(&quot; &quot;));</span>
+<span class="fc" id="L439">        String command = ls.get(0).toLowerCase();</span>
+<span class="pc bpc" id="L440" title="6 of 7 branches missed.">        switch (command) {</span>
+            case &quot;add&quot;:
+<span class="nc" id="L442">                this.user_add(ls);</span>
+<span class="nc" id="L443">                break;</span>
+            case &quot;delete&quot;:
+<span class="nc" id="L445">                this.user_delete(ls);</span>
+<span class="nc" id="L446">                break;</span>
+            case &quot;check&quot;:
+<span class="pc bpc" id="L448" title="1 of 2 branches missed.">                if (!this.shoppingCart.isEmpty()){</span>
+<span class="nc" id="L449">                    user_check(ls);</span>
+                }
+                else{
+<span class="fc" id="L452">                    System.out.println(&quot;add something to shoppingcart&quot;);</span>
+<span class="fc" id="L453">                    return &quot;add something to shoppingcart\n&quot;;</span>
+                }
+                break;
+            case &quot;machine&quot;:
+<span class="nc" id="L457">                this.user_machine();</span>
+<span class="nc" id="L458">                break;</span>
+            case &quot;cart&quot;:
+<span class="nc" id="L460">                this.user_cart();</span>
+<span class="nc" id="L461">                break;</span>
+            case &quot;cancel&quot;:
+<span class="nc" id="L463">                this.user_cancel();</span>
+                break;
+        }
+<span class="nc" id="L466">        return null;</span>
+    }
+
+    String staff_input(String s){
+<span class="nc" id="L470">        List&lt;String&gt; ls = Arrays.asList(s.split(&quot; &quot;));</span>
+<span class="nc" id="L471">        String command = ls.get(0).toLowerCase();</span>
+<span class="nc bnc" id="L472" title="All 4 branches missed.">        if (command.equals(&quot;fill&quot;) || command.equals(&quot;f&quot;)) {</span>
+<span class="nc" id="L473">            this.staff_fill();</span>
+<span class="nc" id="L474">            return null;</span>
+        }
+<span class="nc bnc" id="L476" title="All 2 branches missed.">        else if (command.equals(&quot;print&quot;)){</span>
+<span class="nc" id="L477">            this.staff_print();</span>
+<span class="nc" id="L478">            return null;</span>
+        }
+<span class="nc" id="L480">        return null;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

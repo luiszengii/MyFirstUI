@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Application.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">VendingMachine.project</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Application.java</span></div><h1>Application.java</h1><pre class="source lang-java linenums">import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
+<span class="nc" id="L7">class countDown implements Runnable {</span>
+    public void run(){
+<span class="nc bnc" id="L9" title="All 2 branches missed.">        for(int i=0; i&lt;16; i++){</span>
+<span class="nc" id="L10">            try {TimeUnit.SECONDS.sleep(1);} catch (InterruptedException e){break;};</span>
+<span class="nc bnc" id="L11" title="All 4 branches missed.">            if(i&gt;=7 &amp;&amp; i&lt;14) {</span>
+<span class="nc" id="L12">                System.out.printf(&quot;transaction will be canceled in %d seconds, press ENTER to awake the machine \n&quot;, 14 - i);</span>
+<span class="nc bnc" id="L13" title="All 2 branches missed.">            } else if (i==15){</span>
+<span class="nc" id="L14">                Application.VM.user_cancel();</span>
+            }
+        }
+<span class="nc" id="L17">    }</span>
+}
+
+<span class="nc" id="L20">public class Application {</span>
+
+<span class="nc" id="L22">    static VendingMachine VM = new VendingMachine();</span>
+<span class="nc" id="L23">    static boolean isInTransaction = false;</span>
+    static double input_amount;
+
+    public static void main(String[] args) throws InterruptedException {
+
+<span class="nc" id="L28">        System.out.println(VendingMachine.MAINMENU + &quot;Vending Machine activated\nEmpty, Waiting for staff to fill, please type in \'staff\' to enter staff mode.\n&quot; );</span>
+<span class="nc" id="L29">        Scanner scan = new Scanner(System.in);</span>
+<span class="nc" id="L30">        countDown cd = new countDown();</span>
+<span class="nc" id="L31">        Thread counter = new Thread(cd);//initialize counter, Time out for user mode: 10s in total, last 5s print countdown message</span>
+
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        while (scan.hasNextLine()) {</span>
+<span class="nc" id="L34">            String s = scan.nextLine();</span>
+<span class="nc bnc" id="L35" title="All 4 branches missed.">            if (s.equals(&quot;staff&quot;) || s.equals(&quot;s&quot;)) {</span>
+<span class="nc" id="L36">                VM.mode = &quot;staff&quot;;</span>
+<span class="nc" id="L37">                System.out.println(&quot;now in staff mode\n&quot; + VendingMachine.Staff_Instruction);</span>
+<span class="nc" id="L38">                continue;</span>
+<span class="nc bnc" id="L39" title="All 4 branches missed.">            } else if (s.equals(&quot;user&quot;) || s.equals(&quot;u&quot;)) {</span>
+<span class="nc" id="L40">                VM.mode = &quot;user&quot;;</span>
+<span class="nc" id="L41">                System.out.println(VendingMachine.User_Instruction);</span>
+<span class="nc" id="L42">                continue;</span>
+            }
+
+<span class="nc bnc" id="L45" title="All 3 branches missed.">            switch (VM.mode){</span>
+                case &quot;user&quot;:
+                    //shut down the counter when the new input come
+<span class="nc" id="L48">                    counter.interrupt();</span>
+
+                    //look for check to enter check status
+<span class="nc bnc" id="L51" title="All 2 branches missed.">                    if (s.equals(&quot;check&quot;)){</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">                        if (!VM.shoppingCart.isEmpty()) {</span>
+<span class="nc" id="L53">                            isInTransaction = true;</span>
+<span class="nc" id="L54">                            input_amount = 0.0;</span>
+                        }
+                    }
+
+                    //if in transaction pass it to user_check() directly
+<span class="nc bnc" id="L59" title="All 2 branches missed.">                    if (isInTransaction) {</span>
+<span class="nc" id="L60">                        VM.user_check(Arrays.asList(s.split(&quot; &quot;)));</span>
+                    } else {
+<span class="nc" id="L62">                        VM.user_input(s);</span>
+<span class="nc" id="L63">                        System.out.println(VendingMachine.User_Instruction);//print instruction before each user input</span>
+                    }
+
+                    //reset the counter
+<span class="nc" id="L67">                    counter = new Thread(cd);</span>
+<span class="nc bnc" id="L68" title="All 4 branches missed.">                    if (!VM.shoppingCart.isEmpty() &amp;&amp; VM.mode.equals(&quot;user&quot;)) { counter.start(); }</span>
+
+                    //print out all the items that are in low inventory level
+<span class="nc" id="L71">                    List&lt;String&gt; ls = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">                    for (Product p : VM.getProduct_status().keySet()) {</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">                        if (p.getNum_of_items()==0) {</span>
+<span class="nc" id="L74">                            ls.add(p.getName());</span>
+                        }
+<span class="nc" id="L76">                    }</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">                    if (!ls.isEmpty()) {</span>
+<span class="nc" id="L78">                        System.out.println(Arrays.toString(ls.toArray()) + &quot; is out of stock! call a staff ASAP!!!\n&quot;);</span>
+                    }
+
+                    break;
+                case &quot;staff&quot;:
+<span class="nc" id="L83">                    VM.staff_input(s);</span>
+<span class="nc" id="L84">                    System.out.println(VendingMachine.Staff_Instruction);</span>
+                    break;
+            }
+
+<span class="nc" id="L88">        }</span>
+<span class="nc" id="L89">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

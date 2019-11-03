@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MultipleTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2019-11-01T13:08:25" hostname="林贼的dell" time="0.019">
+  <properties/>
+  <testcase name="multiple_item_of_same_kind()" classname="MultipleTest" time="0.001"/>
+  <testcase name="wrong_format_check()" classname="MultipleTest" time="0.001"/>
+  <testcase name="calculate_total_price()" classname="MultipleTest" time="0.002"/>
+  <testcase name="stock_check()" classname="MultipleTest" time="0.002"/>
+  <testcase name="multiple_item()" classname="MultipleTest" time="0.002"/>
+  <testcase name="category_item()" classname="MultipleTest" time="0.006"/>
+  <system-out><![CDATA[Sorry, we are out of water
+'CHECK' command is a wrong format
+SC: 2 of water has been added to your shopping cart.
+SC: 2 of original has been added to your shopping cart.
+fill successfully
+fill successfully
+SC: 1 of water has been added to your shopping cart.
+fill successfully
+SC: 3 of water has been added to your shopping cart.
+           Shopping Cart            
+------------------------------------
+|     Drinks      |   Chocolates   |
+------------------------------------
+|     water 3    |     MandM 0   |
+|   soft_drink 0 |      Mars 0   |
+|     juice 0    |    Sneakers 0 |
+|                 |     Bounty 0  |
+------------------------------------
+|     Chips       |     Lollies    |
+------------------------------------
+|    original 0  |  sour_worms 0 |
+|     chicken 0  |  jellybeans 0 |
+|       BBQ 0    | little_bears 0|
+|sweet_chillies 0|   part_mix 0  |
+------------------------------------
+
+The total price you need to pay is: $6.00
+Now you will enter paying progress
+You can only pay by these denominations of coins or notes: 10c, 20c, 50c, $1, $2, $5, $10, $20
+SC: 4 of original has been added to your shopping cart.
+           Shopping Cart            
+------------------------------------
+|     Drinks      |   Chocolates   |
+------------------------------------
+|     water 3    |     MandM 0   |
+|   soft_drink 0 |      Mars 0   |
+|     juice 0    |    Sneakers 0 |
+|                 |     Bounty 0  |
+------------------------------------
+|     Chips       |     Lollies    |
+------------------------------------
+|    original 4  |  sour_worms 0 |
+|     chicken 0  |  jellybeans 0 |
+|       BBQ 0    | little_bears 0|
+|sweet_chillies 0|   part_mix 0  |
+------------------------------------
+
+The total price you need to pay is: $16.00
+Now you will enter paying progress
+You can only pay by these denominations of coins or notes: 10c, 20c, 50c, $1, $2, $5, $10, $20
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

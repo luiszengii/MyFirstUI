@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="VendingMachineIDSelectionTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-11-01T13:08:25" hostname="林贼的dell" time="0.031">
+  <properties/>
+  <testcase name="select_wrongID_whenNoItems()" classname="VendingMachineIDSelectionTest" time="0.001"/>
+  <testcase name="select_wrongID_whenHaveItems()" classname="VendingMachineIDSelectionTest" time="0.011"/>
+  <testcase name="select_IDcomplexItems()" classname="VendingMachineIDSelectionTest" time="0.007"/>
+  <testcase name="select_correctID_whenNoItems()" classname="VendingMachineIDSelectionTest" time="0.003"/>
+  <testcase name="select_rightID_whenHaveItems()" classname="VendingMachineIDSelectionTest" time="0.002"/>
+  <system-out><![CDATA[Product not exist, please type in the correct product name
+fill successfully
+Product not exist, please type in the correct product name
+The number you input is out of stock
+fill successfully
+SC: 2 of water has been added to your shopping cart.
+The number you input is out of stock
+fill successfully
+SC: 1 of water has been added to your shopping cart.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

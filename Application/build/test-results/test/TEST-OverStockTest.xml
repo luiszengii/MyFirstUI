@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="OverStockTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2019-11-01T13:08:25" hostname="林贼的dell" time="0.022">
+  <properties/>
+  <testcase name="test_overstockA_whenNoItems_useName()" classname="OverStockTest" time="0.003"/>
+  <testcase name="test_overstockE_whenAlreadyAddItems_useName()" classname="OverStockTest" time="0.002"/>
+  <testcase name="test_overstockF_whenAlreadyAddItems_useID()" classname="OverStockTest" time="0.002"/>
+  <testcase name="test_overstockB_whenNoItems_useID()" classname="OverStockTest" time="0.006"/>
+  <testcase name="test_overstockC_whenHaveItems_useName()" classname="OverStockTest" time="0.001"/>
+  <testcase name="test_overstockD_whenHaveItems_useID()" classname="OverStockTest" time="0.001"/>
+  <system-out><![CDATA[The number you input is out of stock
+fill successfully
+SC: 3 of water has been added to your shopping cart.
+The number you input is out of stock
+fill successfully
+SC: 3 of water has been added to your shopping cart.
+The number you input is out of stock
+The number you input is out of stock
+fill successfully
+The number you input is out of stock
+fill successfully
+The number you input is out of stock
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

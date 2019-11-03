@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="VendingMachineCheckTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2019-11-01T13:08:25" hostname="林贼的dell" time="0.088">
+  <properties/>
+  <testcase name="test3_wrongFormatCheck_whenHaveItems_Noemptysc_useName()" classname="VendingMachineCheckTest" time="0.053"/>
+  <testcase name="test4_wrongFormatCheck_whenHaveItems_Noemptysc_useID()" classname="VendingMachineCheckTest" time="0.002"/>
+  <testcase name="test1_wrongFormatCheck_whenNoItems_emptysc()" classname="VendingMachineCheckTest" time="0.001"/>
+  <testcase name="test2_wrongFormatCheck_whenHaveItems_emptysc()" classname="VendingMachineCheckTest" time="0.002"/>
+  <testcase name="test5_Check_whenNoItems_emptysc()" classname="VendingMachineCheckTest" time="0.002"/>
+  <testcase name="test8_Check_whenHaveItems_Noemptysc_useID()" classname="VendingMachineCheckTest" time="0.012"/>
+  <testcase name="test6_Check_whenHaveItems_emptysc()" classname="VendingMachineCheckTest" time="0.002"/>
+  <testcase name="test7_Check_whenHaveItems_Noemptysc_useName()" classname="VendingMachineCheckTest" time="0.006"/>
+  <system-out><![CDATA[fill successfully
+SC: 1 of water has been added to your shopping cart.
+'CHECK' command is a wrong format
+fill successfully
+SC: 1 of water has been added to your shopping cart.
+'CHECK' command is a wrong format
+'CHECK' command is a wrong format
+fill successfully
+'CHECK' command is a wrong format
+add something to shoppingcart
+fill successfully
+SC: 1 of water has been added to your shopping cart.
+           Shopping Cart            
+------------------------------------
+|     Drinks      |   Chocolates   |
+------------------------------------
+|     water 1    |     MandM 0   |
+|   soft_drink 0 |      Mars 0   |
+|     juice 0    |    Sneakers 0 |
+|                 |     Bounty 0  |
+------------------------------------
+|     Chips       |     Lollies    |
+------------------------------------
+|    original 0  |  sour_worms 0 |
+|     chicken 0  |  jellybeans 0 |
+|       BBQ 0    | little_bears 0|
+|sweet_chillies 0|   part_mix 0  |
+------------------------------------
+
+The total price you need to pay is: $2.00
+Now you will enter paying progress
+You can only pay by these denominations of coins or notes: 10c, 20c, 50c, $1, $2, $5, $10, $20
+fill successfully
+add something to shoppingcart
+fill successfully
+SC: 1 of water has been added to your shopping cart.
+           Shopping Cart            
+------------------------------------
+|     Drinks      |   Chocolates   |
+------------------------------------
+|     water 1    |     MandM 0   |
+|   soft_drink 0 |      Mars 0   |
+|     juice 0    |    Sneakers 0 |
+|                 |     Bounty 0  |
+------------------------------------
+|     Chips       |     Lollies    |
+------------------------------------
+|    original 0  |  sour_worms 0 |
+|     chicken 0  |  jellybeans 0 |
+|       BBQ 0    | little_bears 0|
+|sweet_chillies 0|   part_mix 0  |
+------------------------------------
+
+The total price you need to pay is: $2.00
+Now you will enter paying progress
+You can only pay by these denominations of coins or notes: 10c, 20c, 50c, $1, $2, $5, $10, $20
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

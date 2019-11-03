@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ShoppingCartTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2019-11-01T13:08:25" hostname="林贼的dell" time="0.042">
+  <properties/>
+  <testcase name="calculate_total_price()" classname="ShoppingCartTest" time="0.001"/>
+  <testcase name="change_num_of_product_wrongGood()" classname="ShoppingCartTest" time="0.001"/>
+  <testcase name="change_num_of_product_zero()" classname="ShoppingCartTest" time="0.001"/>
+  <testcase name="add_Product_negativeNum()" classname="ShoppingCartTest" time="0.002"/>
+  <testcase name="chage_num_of_product_negative()" classname="ShoppingCartTest" time="0.001"/>
+  <testcase name="showUI_noAdd()" classname="ShoppingCartTest" time="0.001"/>
+  <testcase name="clear()" classname="ShoppingCartTest" time="0.001"/>
+  <testcase name="delete_Product_negative()" classname="ShoppingCartTest" time="0.001"/>
+  <testcase name="getList_of_Products_formal()" classname="ShoppingCartTest" time="0.001"/>
+  <testcase name="showUI_withAdd()" classname="ShoppingCartTest" time="0.003"/>
+  <testcase name="add_Product_normal()" classname="ShoppingCartTest" time="0.006"/>
+  <testcase name="delete_Product_overProducts()" classname="ShoppingCartTest" time="0.001"/>
+  <testcase name="delete_Product_normal()" classname="ShoppingCartTest" time="0.001"/>
+  <testcase name="change_num_of_product_formal()" classname="ShoppingCartTest" time="0.003"/>
+  <testcase name="getList_of_Products_noAdd()" classname="ShoppingCartTest" time="0.002"/>
+  <system-out><![CDATA[SC: 2 of water has been added to your shopping cart.
+SC: 1 of BBQ has been added to your shopping cart.
+SC: 2 of water has been added to your shopping cart.
+SC: Number of item changed successfully.
+SC: 2 of water has been added to your shopping cart.
+SC: Number of item changed successfully.
+SC: Cannot add negative or 0 number of product
+SC: Cannot add negative or 0 number of product
+SC: 2 of water has been added to your shopping cart.
+SC: Cannot change number of product to a negative number
+SC: 2 of water has been added to your shopping cart.
+SC: 1 of BBQ has been added to your shopping cart.
+SC: 1 of water has been added to your shopping cart.
+SC: Cannot add negative number of product
+SC: Cannot add negative number of product
+SC: 1 of water has been added to your shopping cart.
+SC: 1 of BBQ has been added to your shopping cart.
+SC: 1 of water has been added to your shopping cart.
+SC: 2 of juice has been added to your shopping cart.
+SC: 1 of water has been added to your shopping cart.
+SC: 2 of BBQ has been added to your shopping cart.
+SC: 1 of water has been added to your shopping cart.
+SC: number exceed the actual number of product in shopping cart
+SC: 2 of water has been added to your shopping cart.
+SC: 1 of water has been deleted from your shopping cart.
+SC: 3 of BBQ has been added to your shopping cart.
+SC: 3 of BBQ has been deleted from your shopping cart.
+SC: 2 of water has been added to your shopping cart.
+SC: 2 of BBQ has been added to your shopping cart.
+SC: Number of item changed successfully.
+SC: Number of item changed successfully.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

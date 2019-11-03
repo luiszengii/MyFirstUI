@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ProductTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2019-11-01T13:08:25" hostname="林贼的dell" time="0.015">
+  <properties/>
+  <testcase name="test_sell_more_than_stock()" classname="ProductTest" time="0.002"/>
+  <testcase name="test_getCategory()" classname="ProductTest" time="0.0"/>
+  <testcase name="test_getName()" classname="ProductTest" time="0.0"/>
+  <testcase name="test_fill()" classname="ProductTest" time="0.001"/>
+  <testcase name="test_sell()" classname="ProductTest" time="0.001"/>
+  <testcase name="test_sell_less_than_1()" classname="ProductTest" time="0.002"/>
+  <testcase name="test_getProduct_id()" classname="ProductTest" time="0.001"/>
+  <testcase name="test_getPrice()" classname="ProductTest" time="0.001"/>
+  <testcase name="test_getNum_of_items()" classname="ProductTest" time="0.0"/>
+  <system-out><![CDATA[VM: Cannot sell more than we have
+VM: Cannot sell less than 1 product
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

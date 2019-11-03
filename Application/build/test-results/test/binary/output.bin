@@ -1,0 +1,164 @@
+fill successfully
+5SC: 1 of water has been added to your shopping cart.
+#'CHECK' command is a wrong format
+fill successfully
+5SC: 1 of water has been added to your shopping cart.
+#'CHECK' command is a wrong format
+#'CHECK' command is a wrong format
+fill successfully
+#'CHECK' command is a wrong format
+add something to shoppingcart
+fill successfully
+5SC: 1 of water has been added to your shopping cart.
+%           Shopping Cart            
+%------------------------------------
+%|     Drinks      |   Chocolates   |
+%------------------------------------
+#|     water 1    |     MandM 0   |
+#|   soft_drink 0 |      Mars 0   |
+#|     juice 0    |    Sneakers 0 |
+$|                 |     Bounty 0  |
+%------------------------------------
+%|     Chips       |     Lollies    |
+%------------------------------------
+#|    original 0  |  sour_worms 0 |
+#|     chicken 0  |  jellybeans 0 |
+#|       BBQ 0    | little_bears 0|
+#|sweet_chillies 0|   part_mix 0  |
+%------------------------------------
+
+*The total price you need to pay is: $2.00
+$Now you will enter paying progress
+`You can only pay by these denominations of coins or notes: 10c, 20c, 50c, $1, $2, $5, $10, $20
+fill successfully
+add something to shoppingcart
+	fill successfully
+	5SC: 1 of water has been added to your shopping cart.
+	%           Shopping Cart            
+	%------------------------------------
+	%|     Drinks      |   Chocolates   |
+	%------------------------------------
+	#|     water 1    |     MandM 0   |
+	#|   soft_drink 0 |      Mars 0   |
+	#|     juice 0    |    Sneakers 0 |
+	$|                 |     Bounty 0  |
+	%------------------------------------
+	%|     Chips       |     Lollies    |
+	%------------------------------------
+	#|    original 0  |  sour_worms 0 |
+	#|     chicken 0  |  jellybeans 0 |
+	#|       BBQ 0    | little_bears 0|
+	#|sweet_chillies 0|   part_mix 0  |
+	%------------------------------------
+	
+	*The total price you need to pay is: $2.00
+	$Now you will enter paying progress
+	`You can only pay by these denominations of coins or notes: 10c, 20c, 50c, $1, $2, $5, $10, $20
+`You can only pay by these denominations of coins or notes: 10c, 20c, 50c, $1, $2, $5, $10, $20
+<Product not exist, please type in the correct product name
+fill successfully
+<Product not exist, please type in the correct product name
+Sorry, we are out of water
+#'CHECK' command is a wrong format
+5SC: 2 of water has been added to your shopping cart.
+8SC: 2 of original has been added to your shopping cart.
+fill successfully
+fill successfully
+5SC: 1 of water has been added to your shopping cart.
+fill successfully
+5SC: 3 of water has been added to your shopping cart.
+%           Shopping Cart            
+%------------------------------------
+%|     Drinks      |   Chocolates   |
+%------------------------------------
+#|     water 3    |     MandM 0   |
+#|   soft_drink 0 |      Mars 0   |
+#|     juice 0    |    Sneakers 0 |
+$|                 |     Bounty 0  |
+%------------------------------------
+%|     Chips       |     Lollies    |
+%------------------------------------
+#|    original 0  |  sour_worms 0 |
+#|     chicken 0  |  jellybeans 0 |
+#|       BBQ 0    | little_bears 0|
+#|sweet_chillies 0|   part_mix 0  |
+%------------------------------------
+
+*The total price you need to pay is: $6.00
+$Now you will enter paying progress
+`You can only pay by these denominations of coins or notes: 10c, 20c, 50c, $1, $2, $5, $10, $20
+8SC: 4 of original has been added to your shopping cart.
+%           Shopping Cart            
+%------------------------------------
+%|     Drinks      |   Chocolates   |
+%------------------------------------
+#|     water 3    |     MandM 0   |
+#|   soft_drink 0 |      Mars 0   |
+#|     juice 0    |    Sneakers 0 |
+$|                 |     Bounty 0  |
+%------------------------------------
+%|     Chips       |     Lollies    |
+%------------------------------------
+#|    original 4  |  sour_worms 0 |
+#|     chicken 0  |  jellybeans 0 |
+#|       BBQ 0    | little_bears 0|
+#|sweet_chillies 0|   part_mix 0  |
+%------------------------------------
+
++The total price you need to pay is: $16.00
+$Now you will enter paying progress
+`You can only pay by these denominations of coins or notes: 10c, 20c, 50c, $1, $2, $5, $10, $20
+&The number you input is out of stock
+fill successfully
+5SC: 3 of water has been added to your shopping cart.
+&The number you input is out of stock
+fill successfully
+5SC: 3 of water has been added to your shopping cart.
+&The number you input is out of stock
+&The number you input is out of stock
+fill successfully
+&The number you input is out of stock
+fill successfully
+&The number you input is out of stock
+ #VM: Cannot sell more than we have
+ %%VM: Cannot sell less than 1 product
+*)5SC: 2 of water has been added to your shopping cart.
+*)3SC: 1 of BBQ has been added to your shopping cart.
+*+5SC: 2 of water has been added to your shopping cart.
+*+*SC: Number of item changed successfully.
+*,5SC: 2 of water has been added to your shopping cart.
+*,*SC: Number of item changed successfully.
+*-0SC: Cannot add negative or 0 number of product
+*-0SC: Cannot add negative or 0 number of product
+*.5SC: 2 of water has been added to your shopping cart.
+*.:SC: Cannot change number of product to a negative number
+*05SC: 2 of water has been added to your shopping cart.
+*03SC: 1 of BBQ has been added to your shopping cart.
+*15SC: 1 of water has been added to your shopping cart.
+*1+SC: Cannot add negative number of product
+*1+SC: Cannot add negative number of product
+*25SC: 1 of water has been added to your shopping cart.
+*23SC: 1 of BBQ has been added to your shopping cart.
+*35SC: 1 of water has been added to your shopping cart.
+*35SC: 2 of juice has been added to your shopping cart.
+*45SC: 1 of water has been added to your shopping cart.
+*43SC: 2 of BBQ has been added to your shopping cart.
+*55SC: 1 of water has been added to your shopping cart.
+*5ASC: number exceed the actual number of product in shopping cart
+*65SC: 2 of water has been added to your shopping cart.
+*69SC: 1 of water has been deleted from your shopping cart.
+*63SC: 3 of BBQ has been added to your shopping cart.
+*67SC: 3 of BBQ has been deleted from your shopping cart.
+*75SC: 2 of water has been added to your shopping cart.
+*73SC: 2 of BBQ has been added to your shopping cart.
+*7*SC: Number of item changed successfully.
+*7*SC: Number of item changed successfully.
+KJ<Product not exist, please type in the correct product name
+KLfill successfully
+KL<Product not exist, please type in the correct product name
+KM&The number you input is out of stock
+KMfill successfully
+KM5SC: 2 of water has been added to your shopping cart.
+KN&The number you input is out of stock
+KOfill successfully
+KO5SC: 1 of water has been added to your shopping cart.

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CalculateTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-11-01T13:08:25" hostname="林贼的dell" time="0.009">
+  <properties/>
+  <testcase name="convert_input_moneyTest()" classname="CalculateTest" time="0.001"/>
+  <testcase name="Calculate_changeTest()" classname="CalculateTest" time="0.004"/>
+  <testcase name="money_reminderTest()" classname="CalculateTest" time="0.001"/>
+  <system-out><![CDATA[You can only pay by these denominations of coins or notes: 10c, 20c, 50c, $1, $2, $5, $10, $20
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

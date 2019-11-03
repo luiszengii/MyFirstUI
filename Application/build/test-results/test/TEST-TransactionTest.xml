@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TransactionTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2019-11-01T13:08:25" hostname="林贼的dell" time="0.054">
+  <properties/>
+  <testcase name="getMoney_paid1()" classname="TransactionTest" time="0.018"/>
+  <testcase name="getMoney_paid2()" classname="TransactionTest" time="0.001"/>
+  <testcase name="getMoney_paid3()" classname="TransactionTest" time="0.001"/>
+  <testcase name="getId1()" classname="TransactionTest" time="0.002"/>
+  <testcase name="getId2()" classname="TransactionTest" time="0.001"/>
+  <testcase name="getId3()" classname="TransactionTest" time="0.001"/>
+  <testcase name="getTotalPrice()" classname="TransactionTest" time="0.001"/>
+  <testcase name="getDate_time1()" classname="TransactionTest" time="0.001"/>
+  <testcase name="getDate_time2()" classname="TransactionTest" time="0.001"/>
+  <testcase name="getDate_time3()" classname="TransactionTest" time="0.001"/>
+  <testcase name="getChange1()" classname="TransactionTest" time="0.0"/>
+  <testcase name="getChange2()" classname="TransactionTest" time="0.001"/>
+  <testcase name="getChange3()" classname="TransactionTest" time="0.001"/>
+  <testcase name="getItem_sold1()" classname="TransactionTest" time="0.001"/>
+  <testcase name="getItem_sold2()" classname="TransactionTest" time="0.001"/>
+  <testcase name="getItem_sold3()" classname="TransactionTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

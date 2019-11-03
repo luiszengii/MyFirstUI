@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Product.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">VendingMachine.project</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Product.java</span></div><h1>Product.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">public enum Product {</span>
+
+<span class="fc" id="L3">    water(&quot;water&quot;, 0, &quot;drinks&quot;, 1, 2),</span>
+<span class="fc" id="L4">    soft_drink(&quot;soft_drink&quot;, 0, &quot;drinks&quot;, 2, 3),</span>
+<span class="fc" id="L5">    juice(&quot;juice&quot;, 0, &quot;drinks&quot;, 3,2.5),</span>
+<span class="fc" id="L6">    MandM(&quot;MandM&quot;, 0, &quot;chocolates&quot;, 4,8),</span>
+<span class="fc" id="L7">    Mars(&quot;Mars&quot;, 0, &quot;chocolates&quot;, 5,5),</span>
+<span class="fc" id="L8">    Sneakers(&quot;Sneakers&quot;, 0, &quot;chocolates&quot;, 6,2.5),</span>
+<span class="fc" id="L9">    Bounty(&quot;Bounty&quot;, 0, &quot;chocolates&quot;, 7,1),</span>
+<span class="fc" id="L10">    original(&quot;original&quot;, 0, &quot;chips&quot;, 8,2.5),</span>
+<span class="fc" id="L11">    chicken(&quot;chicken&quot;, 0, &quot;chips&quot;, 9,3),</span>
+<span class="fc" id="L12">    BBQ(&quot;BBQ&quot;, 0, &quot;chips&quot;, 10,2.7),</span>
+<span class="fc" id="L13">    sweet_chillies(&quot;sweet_chillies&quot;, 0, &quot;chips&quot;, 11,3),</span>
+<span class="fc" id="L14">    sour_worms(&quot;sour_worms&quot;, 0, &quot;lollies&quot;, 12,5),</span>
+<span class="fc" id="L15">    jellybeans(&quot;jellybeans&quot;, 0, &quot;lollies&quot;, 13,2),</span>
+<span class="fc" id="L16">    little_bears(&quot;little_bears&quot;, 0, &quot;lollies&quot;, 14,6.5),</span>
+<span class="fc" id="L17">    part_mix(&quot;part_mix&quot;, 0, &quot;lollies&quot;, 15,4.5);</span>
+
+    private String name;
+    private int num_of_items;
+    private String category;
+    private int product_id;
+    private double price;
+
+<span class="fc" id="L25">    Product(String name, int num_of_items, String category, int id, double price) {</span>
+<span class="fc" id="L26">        this.name = name;</span>
+<span class="fc" id="L27">        this.num_of_items = num_of_items;</span>
+<span class="fc" id="L28">        this.category = category;</span>
+<span class="fc" id="L29">        this.product_id = id;</span>
+<span class="fc" id="L30">        this.price=price;</span>
+<span class="fc" id="L31">    }</span>
+
+    String getName() {
+<span class="fc" id="L34">        return this.name;</span>
+    }
+
+    int getNum_of_items(){
+<span class="fc" id="L38">        return this.num_of_items;</span>
+    }
+
+    void setNum_of_items(int n) {
+<span class="fc" id="L42">        this.num_of_items = n;</span>
+<span class="fc" id="L43">    }</span>
+
+    int getProduct_id(){
+<span class="fc" id="L46">        return this.product_id;</span>
+    }
+
+    String getCategory(){
+<span class="fc" id="L50">        return this.category;</span>
+    }
+
+<span class="fc" id="L53">    double getPrice() {return this.price; }</span>
+
+    // fill can only be used by the staff
+    void fill(){
+<span class="fc" id="L57">        this.num_of_items = 10;</span>
+<span class="fc" id="L58">    }</span>
+
+    // used after the transaction has been confirmed
+    void sell(int n){
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if(n &lt; 1){</span>
+<span class="fc" id="L63">            System.out.println(&quot;VM: Cannot sell less than 1 product&quot;);</span>
+<span class="fc" id="L64">            return;</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        } else if (n &gt; this.num_of_items) {</span>
+<span class="fc" id="L66">            System.out.println(&quot;VM: Cannot sell more than we have&quot;);</span>
+<span class="fc" id="L67">            return;</span>
+        }
+<span class="fc" id="L69">        this.num_of_items -= n;</span>
+<span class="fc" id="L70">    }</span>
+
+    void add_back(int n) {
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if(n &lt; 1){</span>
+<span class="nc" id="L74">            System.out.println(&quot;VM: Cannot add back less than 1 product&quot;);</span>
+<span class="nc" id="L75">            return;</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        } else if (n &gt; (10 - this.num_of_items)) {</span>
+<span class="nc" id="L77">            System.out.println(&quot;VM: Cannot add back more than 10&quot;);</span>
+<span class="nc" id="L78">            return;</span>
+        }
+<span class="nc" id="L80">        this.num_of_items += n;</span>
+//        System.out.printf(&quot;VM: %d of %s has been add back to vending machine\n&quot;, n, this.name);
+<span class="nc" id="L82">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
